@@ -1,0 +1,15 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}Add Book{% endblock %}
+
+{% block content %}
+<form method="post" action="/add" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        </div>
+    </div>
+</form>
+    {% endblock %}

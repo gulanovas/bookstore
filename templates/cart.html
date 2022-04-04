@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+
+<body>
+    <h1>My Cart</h1>
+    {% if books == []: %}
+    <p>Cart is empty.</p>
+    {% endif %}
+    <div class="container">
+        {% for book in books %}
+        <div class="item">
+            <div class="image" style="background-image:url('{{book.img}}')"></div>
+
+            <h2>{{book.title}}</h2>
+            <h4>ID: {{book.id}} | Author : {{book.author}} | Quantity : {{book.quantity}}</h4>
+
+            <a href="{{ url_for('remove_from_cart', id=book.id) }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+            <a href="{{ url_for('logout') }}" class="btn1" >Log Out</a>
+</body>
+</html>

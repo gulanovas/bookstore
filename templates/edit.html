@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Quantity</title>
+</head>
+<body>
+     <form action="{{ url_for('edit') }}" method="POST">
+        <p>Book Name: {{book.title}}</p>
+        <p>Current Quantity: {{book.quantity}}</p>
+         <input hidden="hidden" name="id" value="{{book.id}}">
+        <input name="quantity" type="number" placeholder="New Quantity">
+        <button type="submit">Change Quantity</button>
+    </form>
+</body>
+</html>

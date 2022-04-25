@@ -182,32 +182,11 @@ def delete():
     db.session.commit()
     return redirect(url_for('store'))
 
-
+# Currently working on cart function.
 @app.route("/cart")
 def cart():
     return render_template('cart.html')
 
-
-@app.route("/add_to_cart")
-def add_to_cart():
-    if request.method == "POST":
-        filename = "{}-{}".format(str(datetime.datetime.now()),secure_filename(form.img.data.filename))
-        url = os.path.join(app.config['UPLOADED_IMAGES_DEST'], filename)
-        form.img.data.save(url)
-        new_book = Book(
-            title = form.title.data,
-            author = form.author.data,
-            date = form.date.data,
-     	    description = form.description.data,
-            img = url,
-            trade_price = form.trade_price.data,
-            retail_price = form.retail_price.data,
-            quantity = form.quantity.data
-        )
-        db.session.add(new_book)
-        db.session.commit()
-        return redirect(url_for('cart'))
-    return render_template('cart.html')
 
 
 if __name__ == "__main__":

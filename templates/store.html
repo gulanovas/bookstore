@@ -16,13 +16,12 @@
     <div class="container">
         {% for book in books %}
         <div class="item">
-            <div class="image" style="background-image:url('{{book.img}}')"></div>
+            <div class="image" style="background-image:url(static/images/{{book.img}})"></div>
 
             <h2>{{book.title}}</h2>
             <h4>ID: {{book.id}} | Author : {{book.author}} | Quantity : {{book.quantity}}</h4>
             <a href="{{ url_for('edit', id=book.id) }}">Edit Quantity</a>
             <a href="{{ url_for('delete', id=book.id) }}">Delete</a>
-            <a href="{{ url_for('add_to_cart') }}">Add to Cart</a>
 
         </div>
         {% endfor %}

@@ -11,7 +11,6 @@ import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = 'thisisasecret'
 app.config['UPLOADED_IMAGES_DEST'] = 'static/images'
 
@@ -140,14 +139,14 @@ def add():
     if form.validate_on_submit():
         # CREATE RECORD
         filename = "{}-{}".format(str(datetime.datetime.now()),secure_filename(form.img.data.filename))
-        url = os.path.join(app.config['UPLOADED_IMAGES_DEST'], filename)
+        url = os.path.join(app.config['UPLOADED_IMAGES_DEST'], secure_filename(filename)).replace('\\', '/')
         form.img.data.save(url)
         new_book = Book(
             title = form.title.data,
             author = form.author.data,
             date = form.date.data,
      	    description = form.description.data,
-            img = url,
+            img = secure_filename(filename),
             trade_price = form.trade_price.data,
             retail_price = form.retail_price.data,
             quantity = form.quantity.data
@@ -182,11 +181,10 @@ def delete():
     db.session.commit()
     return redirect(url_for('store'))
 
-# Currently working on cart function.
+
 @app.route("/cart")
 def cart():
     return render_template('cart.html')
-
 
 
 if __name__ == "__main__":
